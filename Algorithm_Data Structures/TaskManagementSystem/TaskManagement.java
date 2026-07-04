@@ -1,0 +1,85 @@
+package TaskManagementSystem;
+public class TaskManagement {
+
+    private Task head;
+
+    // Add Task
+    public void addTask(int id, String name, String status) {
+
+        Task newTask = new Task(id, name, status);
+
+        if (head == null) {
+            head = newTask;
+            return;
+        }
+
+        Task current = head;
+
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        current.next = newTask;
+    }
+
+    // Search Task
+    public Task searchTask(int id) {
+
+        Task current = head;
+
+        while (current != null) {
+
+            if (current.taskId == id)
+                return current;
+
+            current = current.next;
+        }
+
+        return null;
+    }
+
+    // Traverse Tasks
+    public void traverseTasks() {
+
+        if (head == null) {
+            System.out.println("No tasks available.");
+            return;
+        }
+
+        Task current = head;
+
+        while (current != null) {
+            current.display();
+            current = current.next;
+        }
+    }
+
+    // Delete Task
+    public void deleteTask(int id) {
+
+        if (head == null) {
+            System.out.println("Task list is empty.");
+            return;
+        }
+
+        if (head.taskId == id) {
+            head = head.next;
+            System.out.println("Task deleted successfully.");
+            return;
+        }
+
+        Task current = head;
+
+        while (current.next != null && current.next.taskId != id) {
+            current = current.next;
+        }
+
+        if (current.next == null) {
+            System.out.println("Task not found.");
+            return;
+        }
+
+        current.next = current.next.next;
+        System.out.println("Task deleted successfully.");
+    }
+}
