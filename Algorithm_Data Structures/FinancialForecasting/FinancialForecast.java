@@ -1,0 +1,15 @@
+package FinancialForecasting;
+
+public class FinancialForecast {
+
+    // Recursive method to calculate future value
+    public static double futureValue(double presentValue, double growthRate, int years) {
+
+        // Base case
+        if (years == 0)
+            return presentValue;
+
+        // Recursive case
+        return (1 + growthRate) * futureValue(presentValue, growthRate, years - 1);
+    }
+}
